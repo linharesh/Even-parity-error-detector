@@ -19,6 +19,7 @@ public class Decryptor {
     
     private File file;
     private FileInputStream fileInputStream;
+    private DataInputStream dataInputStream;
 
     public void decript(String inputFilepath, String outputFilepath, int[] keys) throws IOException {
         ArrayList<Integer> encriptedData = this.readInputFile(inputFilepath) ;
@@ -29,25 +30,25 @@ public class Decryptor {
             decriptedData.add(BinaryExponent.binExp(data, keys[1], keys[0]));
         }
         OutputFileWriter outputFileWriter = new OutputFileWriter();
-        outputFileWriter.writeEncriptedFile(outputFilepath, decriptedData);
+        outputFileWriter.writeDecryptedFile(outputFilepath, decriptedData);
     }
 
     private ArrayList<Integer> readInputFile(String inputFilePath) throws IOException {
 
         file = new File(inputFilePath);
         fileInputStream = new FileInputStream(file);
-        System.out.println("Total file size to encode (in bytes) : " + fileInputStream.available());
-
-           int content;
+        int fileSize = fileInputStream.available() ;
+        System.out.println("Total file size to decrypt (in bytes) : " + fileSize);
+        
+        int content;
         ArrayList fileData = new ArrayList<Integer>();
 
-        DataInputStream in = new DataInputStream(new FileInputStream(inputFilePath));
+        dataInputStream = new DataInputStream(new FileInputStream(inputFilePath));
         
-        while ((content = in.readInt()) != -1) {
+        while (fileSize > 0) {
+            content = dataInputStream.readShort();
+            fileSize = fileSize - 2 ;
             System.out.println((int) content);
-            if (((int) content) > 255 ){
-                System.out.println("Leitura maior que 255");
-            }
             fileData.add((int) content);
         }
 

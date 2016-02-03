@@ -17,32 +17,52 @@ import java.util.ArrayList;
  * @author HenriqueLinhares
  */
 public class OutputFileWriter {
-    
+
     private File file;
     private FileOutputStream fileOutputStream;
-    
-    public void writeEncriptedFile(String outputFilePath, ArrayList data) throws IOException{
+    private DataOutputStream dataOutputStream;
+
+    public void writeEncriptedFile(String outputFilePath, ArrayList data) throws IOException {
+
         file = new File(outputFilePath);
+
         if (!file.exists()) {
             file.createNewFile();
-        }else{
-        	ConsoleInterface.displayMessage("File already exists");
-        	return;
+        } else {
+            ConsoleInterface.displayMessage("File already exists");
+            return;
         }
-        fileOutputStream = new FileOutputStream(file); 
-    
-        DataOutputStream out = new DataOutputStream(new FileOutputStream(outputFilePath));
-      
-        for (Object d : data){
-            int i = (Integer)d;
+        fileOutputStream = new FileOutputStream(file);
+
+        dataOutputStream = new DataOutputStream(fileOutputStream);
+
+        for (Object d : data) {
+            int i = (short) d;
             System.out.println(i);
-            out.writeInt(i);
+            dataOutputStream.writeShort(i);
         }
-        out.close();
-        fileOutputStream.close();
-    
+        dataOutputStream.close();
     }
-    
-    
-    
+
+    public void writeDecryptedFile(String outputFilePath, ArrayList data) throws IOException {
+
+        file = new File(outputFilePath);
+
+        if (!file.exists()) {
+            file.createNewFile();
+        } else {
+            ConsoleInterface.displayMessage("File already exists");
+            return;
+        }
+        fileOutputStream = new FileOutputStream(file);
+
+        dataOutputStream = new DataOutputStream(fileOutputStream);
+
+        for (Object d : data) {
+            short i = ((Integer) d).shortValue();
+            System.out.println(i);
+            dataOutputStream.write(i);
+        }
+        dataOutputStream.close();
+    }
 }

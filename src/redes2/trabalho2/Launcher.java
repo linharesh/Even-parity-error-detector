@@ -5,7 +5,7 @@
  */
 package redes2.trabalho2;
 
-import ApplicationModel.Encryptor;
+
 import UserInterface.ConsoleInterface;
 import java.io.IOException;
 
@@ -19,7 +19,6 @@ public class Launcher {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        // TODO code application logic here
         ConsoleInterface console = new ConsoleInterface();
         console.launchConsoleInterface();
     }

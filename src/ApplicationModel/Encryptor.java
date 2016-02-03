@@ -35,7 +35,7 @@ public class Encryptor {
 
         file = new File(inputFilePath);
         fileInputStream = new FileInputStream(file);
-        System.out.println("Total file size to encode (in bytes) : " + fileInputStream.available());
+        System.out.println("Total file size to encrypt (in bytes) : " + fileInputStream.available());
 
         int content;
         ArrayList fileData = new ArrayList<Integer>();
@@ -45,7 +45,7 @@ public class Encryptor {
             if (((int) content) > 255 ){
                 System.out.println("Leitura maior que 255");
             }
-            fileData.add((int) content);
+            fileData.add((short) content);
         }
 
         fileInputStream.close();
