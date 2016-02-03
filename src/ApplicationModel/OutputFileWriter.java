@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ApplicationModel;
 
 import UserInterface.ConsoleInterface;
@@ -12,9 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
+/** Class responsable for writing information into files
  *
- * @author HenriqueLinhares
+ * @author Henrique Linhares ; Raphael Quintanilha ; Pablo Curty ; Filipe Coimbra
  */
 public class OutputFileWriter {
 
@@ -22,7 +17,13 @@ public class OutputFileWriter {
     private FileOutputStream fileOutputStream;
     private DataOutputStream dataOutputStream;
 
-    public void writeEncriptedFile(String outputFilePath, ArrayList data) throws IOException {
+    /** Method used to create and write encrypted information into a file.
+     * 
+     * @param outputFilePath The path to the file that will be created
+     * @param data The encrypted data that will be written into the file
+     * @throws IOException Can throw IOException
+     */
+    public void writeEncryptedFile(String outputFilePath, ArrayList data) throws IOException {
 
         file = new File(outputFilePath);
 
@@ -38,12 +39,17 @@ public class OutputFileWriter {
 
         for (Object d : data) {
             int i = (short) d;
-            System.out.println(i);
             dataOutputStream.writeShort(i);
         }
         dataOutputStream.close();
     }
 
+    /** Method used to create and write decrypted information into a file.
+     * 
+     * @param outputFilePath The path to the file that will be created
+     * @param data The decrypted data that will be written into the file
+     * @throws IOException Can throw IOException
+     */
     public void writeDecryptedFile(String outputFilePath, ArrayList data) throws IOException {
 
         file = new File(outputFilePath);
@@ -59,9 +65,7 @@ public class OutputFileWriter {
         dataOutputStream = new DataOutputStream(fileOutputStream);
 
         for (Object d : data) {
-            short i = ((Integer) d).shortValue();
-            System.out.println(i);
-            dataOutputStream.write(i);
+            dataOutputStream.write((int)d);
         }
         dataOutputStream.close();
     }

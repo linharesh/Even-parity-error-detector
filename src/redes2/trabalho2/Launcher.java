@@ -1,23 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package redes2.trabalho2;
 
 
 import UserInterface.ConsoleInterface;
 import java.io.IOException;
 
-/**
+/** Class that launch the application
  *
- * @author HenriqueLinhares
+ * @author Henrique Linhares ; Raphael Quintanilha ; Pablo Curty ; Filipe Coimbra
  */
 public class Launcher {
 
-    /**
-     * @param args the command line arguments
-     */
+   /** Launch the application
+    * 
+    * @param args
+    * @throws IOException 
+    */
     public static void main(String[] args) throws IOException {
         ConsoleInterface console = new ConsoleInterface();
         console.launchConsoleInterface();

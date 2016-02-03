@@ -2,6 +2,7 @@ package UserInterface;
 
 import ApplicationModel.Decryptor;
 import ApplicationModel.Encryptor;
+import ApplicationModel.RSAKeys;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class ConsoleInterface {
     public void launchConsoleInterface() throws IOException {
         System.out.println("Hello! Welcome to the RSA Encripter / Decripter");
         int encriptOrDecript = this.chooseEncriptOrDecript();
-        int[] keys = this.readKeys();
+        RSAKeys keys = this.readKeys();
         String inputFilePath = this.chooseINFile() ; 
         String outputFilePath = this.chooseOUTFile() ;
         
@@ -133,31 +134,30 @@ public class ConsoleInterface {
      * @return An array with both keys
      * @throws IOException Can throw IO exception
      */
-    private int[] readKeys() throws IOException {
-        int[] keys = new int[2];
+    private RSAKeys readKeys() throws IOException {
+        int publicKey;
+        int privateKey;
         String readStr;
 
         do {
-            System.out.println("Enter the first key (N)");
+            System.out.println("Enter the key (N)");
             readStr = inputConsole.readLine();
         } while (!nKeyValidator(readStr));
-        keys[0] = Integer.parseInt(readStr);
+        publicKey = Integer.parseInt(readStr);
 
         do {
-            System.out.println("Enter the second key (D or E)");
+            System.out.println("Enter the key (D or E)");
             readStr = inputConsole.readLine();
         } while (!isNumeric(readStr));
-        keys[1] = Integer.parseInt(readStr);
-
-        return keys;
+        privateKey = Integer.parseInt(readStr);
+        
+        return new RSAKeys(publicKey, privateKey);
     }
 
     private boolean nKeyValidator(String readStr) {
         int key = Integer.parseInt(readStr);
         if (isNumeric(readStr)) {
-            if (key > 255 && key < 65536) {
-                return true;
-            }
+            return RSAKeys.nKeyValidator(key);
         }
         return false;
     }

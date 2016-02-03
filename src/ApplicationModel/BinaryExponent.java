@@ -1,42 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ApplicationModel;
 
-/**
+/** Class responsable for the Binary Exponential calculum.
  *
- * @author HenriqueLinhares
+ * @author Henrique Linhares ; Raphael Quintanilha ; Pablo Curty ; Filipe Coimbra
  */
 public class BinaryExponent {
 
-    public static int binExp(int b, int e, int n) {
+    /**This method implements the Binarty Exponential calculum.
+     * 
+     * @param b Base
+     * @param e Expoent
+     * @param n Modulum
+     * @return Result
+     */
+    public static short binExp(short b, int e, short n) {
 
         int res = b;
         int y = 1;
-
-        //Caso base
         if (e == 0) {
             return 1;
         }
-
         while (e > 1) {
-
             if (e % 2 != 0) {
-                /*Caso especial : expoente é ímpar
-                 Acumular uma potência de 'res' em 'y'
-                 */
                 y = (y * res) % (int) n;
                 e = e - 1;
             }
-
-            //Elevamos 'res' ao quadrado, dividios expoente por 2
             res = (res * res) % ((int) n);
             e = e / 2;
-
         }
-        return ((int) ((res * y) % n));
+        return ((short) ((res * y) % n));
     }
 
 }
