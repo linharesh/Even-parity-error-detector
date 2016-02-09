@@ -7,9 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import sun.security.krb5.internal.EncAPRepPart;
+
 
 /**
  * Class responsable for all user interaction through the console
@@ -29,12 +27,12 @@ public class ConsoleInterface {
 
     /**
      * Launch the console interface. Gets all the information with the user,
-     * such as if he wants to encript or decript, and the paths to the files
+     * such as if he wants to encrypt or decrypt, the keys and the paths to the files
      *
      */
     public void launchConsoleInterface() throws IOException {
         System.out.println("Hello! Welcome to the RSA Encripter / Decripter");
-        int encriptOrDecript = this.chooseEncriptOrDecript();
+        int encriptOrDecript = this.chooseEncryptOrDecrypt();
         RSAKeys keys = this.readKeys();
         String inputFilePath = this.chooseINFile() ; 
         String outputFilePath = this.chooseOUTFile() ;
@@ -63,7 +61,7 @@ public class ConsoleInterface {
      * @return Encode -> returns 1 ; Decode -> returns 2
      * @throws IOException Can throw IO exception
      */
-    private int chooseEncriptOrDecript() throws IOException {
+    private int chooseEncryptOrDecrypt() throws IOException {
         int read;
         do {
             System.out.println("1 - Encript File");
