@@ -56,7 +56,7 @@ public class ConsoleInterface {
     }
 
     /**
-     * Ask for the user if he wats to encript or decript a file
+     * Ask for the user if he wats to encrypt or decrypt a file
      *
      * @return Encode -> returns 1 ; Decode -> returns 2
      * @throws IOException Can throw IO exception
@@ -64,8 +64,8 @@ public class ConsoleInterface {
     private int chooseEncryptOrDecrypt() throws IOException {
         int read;
         do {
-            System.out.println("1 - Encript File");
-            System.out.println("2 - Decript File");
+            System.out.println("1 - Encrypt File");
+            System.out.println("2 - Decrypt File");
             String readStr = inputConsole.readLine();
             read = Integer.parseInt(readStr);
         } while (read != 1 && read != 2);
@@ -127,7 +127,7 @@ public class ConsoleInterface {
     }
 
     /**
-     * Asks the user the keys to the encript / decript process
+     * Asks the user the keys to the encrypt / decrypt process
      *
      * @return An array with both keys
      * @throws IOException Can throw IO exception
@@ -152,6 +152,11 @@ public class ConsoleInterface {
         return new RSAKeys(publicKey, privateKey);
     }
 
+    /** Validates the N key
+     * 
+     * @param readStr The string containing the key that will be validated
+     * @return if its a number and its between 255 and 65536, return true. Otherwise, return false
+     */
     private boolean nKeyValidator(String readStr) {
         int key = Integer.parseInt(readStr);
         if (isNumeric(readStr)) {
@@ -160,6 +165,12 @@ public class ConsoleInterface {
         return false;
     }
 
+    /** Checks if a string is a number
+     * 
+     * @param str The string that will be checked
+     * @return is a number == true
+     *         not a number == false
+     */
     private static boolean isNumeric(String str) {
         for (char c : str.toCharArray()) {
             if (!Character.isDigit(c)) {
