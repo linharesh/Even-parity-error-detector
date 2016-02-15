@@ -31,7 +31,7 @@ public class ConsoleInterface {
      *
      */
     public void launchConsoleInterface() throws IOException {
-        System.out.println("Hello! Welcome to the RSA Encripter / Decripter");
+        System.out.println("Hello! Welcome to the RSA Encrypter / Decrypter");
         int encriptOrDecript = this.chooseEncryptOrDecrypt();
         RSAKeys keys = this.readKeys();
         String inputFilePath = this.chooseINFile() ; 
@@ -133,23 +133,23 @@ public class ConsoleInterface {
      * @throws IOException Can throw IO exception
      */
     private RSAKeys readKeys() throws IOException {
-        int publicKey;
-        int privateKey;
+        int nKey;
+        int edKey;
         String readStr;
 
         do {
             System.out.println("Enter the key (N)");
             readStr = inputConsole.readLine();
         } while (!nKeyValidator(readStr));
-        publicKey = Integer.parseInt(readStr);
+        nKey = Integer.parseInt(readStr);
 
         do {
             System.out.println("Enter the key (D or E)");
             readStr = inputConsole.readLine();
         } while (!isNumeric(readStr));
-        privateKey = Integer.parseInt(readStr);
+        edKey = Integer.parseInt(readStr);
         
-        return new RSAKeys(publicKey, privateKey);
+        return new RSAKeys(nKey, edKey);
     }
 
     /** Validates the N key

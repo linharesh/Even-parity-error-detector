@@ -49,7 +49,7 @@ public class Decryptor {
         int fileSize = fileInputStream.available() ;
         ConsoleInterface.displayMessage("Total file size to decrypt (in bytes) : " + fileSize);
         
-        if (fileSize % 2 == 0){
+        if (fileSize % 2 != 0){
             ConsoleInterface.displayMessage("Error : the number of bytes in the encrypted file is not even");
             ConsoleInterface.displayMessage("Execution aborted");
             System.exit(0);
